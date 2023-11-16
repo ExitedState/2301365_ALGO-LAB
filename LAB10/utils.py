@@ -14,18 +14,15 @@ def read_test_case1_from_txt(filename = "LAB10\Testcase_Q1.txt"):
         return K, adjacency_matrix
 
 def read_test_case2_from_txt(filename = "LAB10\Testcase_Q2.txt"):
-    # Initialize an empty list to store the adjacency matrix
-    adjacency_matrix = []
+    with open(filename, "r") as f:
+        data = f.read()
 
-    # Open the file with the given filename
-    with open(filename, 'r') as file:
-        # Read each line in the file
-        for line in file:
-            # Split the line into elements, convert them to integers, and add to the matrix
-            adjacency_matrix.append([int(x) for x in line.split()])
+    # Parse the input data
+    lines = data.strip().split("\n")
+    n = len(lines)  # Assuming the size of the matrix is equal to the number of lines
+    adj_matrix = [[int(x) for x in line.split()] for line in lines]
 
-    # Return the adjacency matrix
-    return adjacency_matrix
+    return n, adj_matrix
 
 def read_test_case3_from_txt(filename = "LAB10\Testcase_Q3.txt"):
     with open(filename, 'r') as file:
@@ -53,7 +50,8 @@ if __name__ == "__main__":
     
     print("-" * 50)
     print("Test Case 2:")
-    adjacency_matrix = read_test_case2_from_txt()
+    n, adjacency_matrix = read_test_case2_from_txt()
+    print(f"n: {n}")
     print(f"Adjacency Matrix:\n{np.array(adjacency_matrix)}")
     
     print("-" * 50)
